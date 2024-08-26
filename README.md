@@ -24,3 +24,5 @@ AI Quiz Generator is a simple quiz application built using the Tkinter library f
 1. Create a virtual environment:
    ```bash
    python -m virtualenv .venv
+   pip install -r requirements.txt
+   python main.py
