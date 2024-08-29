@@ -16,7 +16,7 @@ AI Quiz Generator is a simple quiz application built using the Tkinter library f
 ### Prerequisites
 
 - Ensure you have Python installed on your machine.
-- Create an OpenAI account and add some credits.
+- Create an OpenAI account and recharge credits.
 - Generate an API key from OpenAI.
 
 ### Setup
@@ -25,4 +25,6 @@ AI Quiz Generator is a simple quiz application built using the Tkinter library f
    ```bash
    python -m virtualenv .venv
    pip install -r requirements.txt
+   export API_KEY="generated_key_from_open_api_account"
    python main.py
+   
