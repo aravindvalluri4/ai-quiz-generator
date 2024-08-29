@@ -35,7 +35,7 @@ class QuizApp:
 
         # Variable to hold the selected answer
         self.selected_answer = tk.StringVar()
-        # self.selected_answer.set("")  # Ensure no option is selected by default
+        self.selected_answer.set(None)  # type: ignore
 
         # Display options as radio buttons
         for option in options:
@@ -72,7 +72,7 @@ class QuizApp:
             next_button.pack(side="right", padx=20, pady=20)
 
     def next_question(self) -> None:
-        self.answers[self.current_question] = self.selected_answer.get()
+        self.answers[self.current_question] = self.selected_answer.get()  # type: ignore
         self.current_question += 1
         self.display_question()
         self.create_navigation_buttons()
@@ -83,7 +83,7 @@ class QuizApp:
         self.create_navigation_buttons()
 
     def submit_quiz(self) -> None:
-        self.answers[self.current_question] = self.selected_answer.get()
+        self.answers[self.current_question] = self.selected_answer.get()  # type: ignore
         self.evaluate_score()
         messagebox.showinfo(
             "Quiz Result", f"Your score is {self.score}/{len(self.questions)}"
