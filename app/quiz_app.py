@@ -1,23 +1,24 @@
 import tkinter as tk
 from tkinter import messagebox
+from typing import Any
 
 
 class QuizApp:
-    def __init__(self, questions):
+    def __init__(self, questions: list[Any], topic: str) -> None:
         self.questions = questions
         self.current_question = 0
         self.answers = [None] * len(self.questions)
         self.score = 0
 
         self.root = tk.Tk()
-        self.root.title("Python Quiz")
+        self.root.title(f"{topic} Quiz")
         self.display_question()
         self.create_navigation_buttons()
 
-    def run(self):
+    def run(self) -> None:
         self.root.mainloop()
 
-    def display_question(self):
+    def display_question(self) -> None:
         question_data = self.questions[self.current_question]
         question_text = question_data["question"]
         options = question_data["options"]
@@ -34,7 +35,7 @@ class QuizApp:
 
         # Variable to hold the selected answer
         self.selected_answer = tk.StringVar()
-        self.selected_answer.set(None)  # Ensure no option is selected by default
+        # self.selected_answer.set("")  # Ensure no option is selected by default
 
         # Display options as radio buttons
         for option in options:
@@ -52,7 +53,7 @@ class QuizApp:
         if self.answers[self.current_question]:
             self.selected_answer.set(self.answers[self.current_question])
 
-    def create_navigation_buttons(self):
+    def create_navigation_buttons(self) -> None:
         # Previous Button
         if self.current_question > 0:
             prev_button = tk.Button(
@@ -70,18 +71,18 @@ class QuizApp:
             next_button = tk.Button(self.root, text="Next", command=self.next_question)
             next_button.pack(side="right", padx=20, pady=20)
 
-    def next_question(self):
+    def next_question(self) -> None:
         self.answers[self.current_question] = self.selected_answer.get()
         self.current_question += 1
         self.display_question()
         self.create_navigation_buttons()
 
-    def previous_question(self):
+    def previous_question(self) -> None:
         self.current_question -= 1
         self.display_question()
         self.create_navigation_buttons()
 
-    def submit_quiz(self):
+    def submit_quiz(self) -> None:
         self.answers[self.current_question] = self.selected_answer.get()
         self.evaluate_score()
         messagebox.showinfo(
@@ -89,7 +90,7 @@ class QuizApp:
         )
         self.root.destroy()
 
-    def evaluate_score(self):
+    def evaluate_score(self) -> None:
         for i, question in enumerate(self.questions):
             if self.answers[i] == question["answer"]:
                 self.score += 1

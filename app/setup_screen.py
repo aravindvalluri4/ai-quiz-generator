@@ -1,17 +1,18 @@
-from .quiz_app import QuizApp
 import tkinter as tk
 from tkinter import messagebox
+
 from .ai_quiz_generator import generate_quiz
+from .quiz_app import QuizApp
 
 
 class SetupScreen(tk.Tk):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.title("Select Quiz Topic and Number of Questions")
         self.geometry("400x300")
         self.create_widgets()
 
-    def create_widgets(self):
+    def create_widgets(self) -> None:
         # Topic Entry
         tk.Label(self, text="Enter Quiz Topic:", font=("Arial", 12)).pack(pady=10)
         self.topic_entry = tk.Entry(self, width=50)
@@ -31,7 +32,7 @@ class SetupScreen(tk.Tk):
         # Start Quiz Button
         tk.Button(self, text="Start Quiz", command=self.start_quiz).pack(pady=20)
 
-    def start_quiz(self):
+    def start_quiz(self) -> None:
         topic = self.topic_entry.get().strip()
         num_questions = int(self.num_questions_var.get())
 
@@ -53,4 +54,4 @@ class SetupScreen(tk.Tk):
             return
 
         self.destroy()  # Close the setup screen
-        QuizApp(questions).run()  # Pass the selected questions to the QuizApp
+        QuizApp(questions, topic).run()  # Pass the selected questions to the QuizApp
