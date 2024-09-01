@@ -1,11 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
-from typing import Any
+
+from .quiz_model import Quiz
 
 
 class QuizApp:
-    def __init__(self, questions: list[Any], topic: str) -> None:
-        self.questions = questions
+    def __init__(self, quiz: Quiz, topic: str) -> None:
+        self.questions = quiz.questions
         self.current_question = 0
         self.answers = [None] * len(self.questions)
         self.score = 0
@@ -20,8 +21,8 @@ class QuizApp:
 
     def display_question(self) -> None:
         question_data = self.questions[self.current_question]
-        question_text = question_data["question"]
-        options = question_data["options"]
+        question_text = question_data.question
+        options = question_data.options
 
         # Clear previous widgets
         for widget in self.root.winfo_children():
@@ -92,5 +93,7 @@ class QuizApp:
 
     def evaluate_score(self) -> None:
         for i, question in enumerate(self.questions):
-            if self.answers[i] == question["answer"]:
+            if self.answers[i] == question.answer:
                 self.score += 1
+        print(self.answers)
+        print(self.questions)

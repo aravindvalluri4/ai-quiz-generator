@@ -3,6 +3,7 @@ from tkinter import messagebox
 
 from .ai_quiz_generator import generate_quiz
 from .quiz_app import QuizApp
+from .quiz_model import Quiz
 
 
 class SetupScreen(tk.Tk):
@@ -47,11 +48,8 @@ class SetupScreen(tk.Tk):
             return
         self.quiz_data = generate_quiz(topic, num_questions)
 
-        questions = self.quiz_data["questions"]
+        self.destroy()
 
-        if not questions:
-            messagebox.showwarning("No Questions", "Not enough questions available.")
-            return
-
-        self.destroy()  # Close the setup screen
-        QuizApp(questions, topic).run()  # Pass the selected questions to the QuizApp
+        QuizApp(
+            self.quiz_data, topic
+        ).run()  # Pass the selected questions to the QuizApp
