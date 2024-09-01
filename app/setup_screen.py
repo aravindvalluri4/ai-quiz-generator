@@ -47,7 +47,7 @@ class SetupScreen(tk.Tk):
             return
         self.quiz_data = generate_quiz(topic, num_questions)
 
-        questions = self.quiz_data["quiz"]["questions"]
+        questions = self.quiz_data["questions"]
 
         if not questions:
             messagebox.showwarning("No Questions", "Not enough questions available.")
