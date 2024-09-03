@@ -5,6 +5,10 @@ from openai import OpenAI, OpenAIError
 from .quiz_model import Quiz
 
 
+class FailedToGenerateQuiz(Exception):
+    message = "Failed to generate quiz properly"
+
+
 def generate_quiz(topic: str, question_count: int) -> Quiz:
     """Generate a quiz based on the topic and number of questions, and return it as a dictionary."""
     api_key = os.getenv("API_KEY", "set_api_key")
@@ -32,4 +36,4 @@ def generate_quiz(topic: str, question_count: int) -> Quiz:
     response_content = response.choices[0].message.parsed
     if response_content:
         return response_content
-    raise Exception("Failed to generate quiz")
+    raise FailedToGenerateQuiz()

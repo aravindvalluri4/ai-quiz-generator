@@ -3,7 +3,6 @@ from tkinter import messagebox
 
 from .ai_quiz_generator import generate_quiz
 from .quiz_app import QuizApp
-from .quiz_model import Quiz
 
 
 class SetupScreen(tk.Tk):
@@ -46,10 +45,8 @@ class SetupScreen(tk.Tk):
                 "Invalid Input", "Number of questions must be at least 1."
             )
             return
-        self.quiz_data = generate_quiz(topic, num_questions)
+        quiz_data = generate_quiz(topic, num_questions)
 
         self.destroy()
 
-        QuizApp(
-            self.quiz_data, topic
-        ).run()  # Pass the selected questions to the QuizApp
+        QuizApp(quiz_data, topic).run()  # Pass the selected questions to the QuizApp
